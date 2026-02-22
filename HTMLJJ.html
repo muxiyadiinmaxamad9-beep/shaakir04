@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dutuch | Cyber Dashboard</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    background:black;
+    color:#00ffcc;
+    font-family:monospace;
+    text-align:center;
+    overflow:hidden;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+.container{
+    margin-top:120px;
+}
+
+h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.typing{
+    font-size:18px;
+    height:30px;
+    margin-bottom:40px;
+}
+
+.button{
+    display:block;
+    width:260px;
+    margin:15px auto;
+    padding:15px;
+    background:transparent;
+    color:#00ffcc;
+    text-decoration:none;
+    border:2px solid #00ffcc;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.button:hover{
+    background:#00ffcc;
+    color:black;
+    box-shadow:0 0 20px #00ffcc;
+}
+
+.footer{
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    color:gray;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+<h1>⚡ Shaakir</h1>
+<div class="typing" id="typing"></div>
+
+<a class="button" href="https://www.youtube.com/@Shaakir.Shortcuts" target="_blank">🎥 YouTube</a>
+<a class="button" href="https://tiktok.com/@eng.shaakir04" target="_blank">🎵 TikTok</a>
+<a class="button" href="https://t.me/engshaakir04" target="_blank">💬 Telegram</a>
+<a class="button" href="https://www.instagram.com/eng.shaaki?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">💻 instagram</a>
+
+</div>
+
+<div class="footer">
+© 2026 Shaakir | Cyber World
+</div>
+
+<script>
+// Typing Effect
+const text = ["Content Creator", "Cyber Enthusiast", "Tech Explorer"];
+let count = 0;
+let index = 0;
+let currentText = "";
+let letter = "";
+
+(function type(){
+    if(count === text.length){ count = 0; }
+    currentText = text[count];
+    letter = currentText.slice(0, ++index);
+    document.getElementById("typing").textContent = letter;
+    if(letter.length === currentText.length){
+        count++;
+        index = 0;
+        setTimeout(type, 1000);
+    } else {
+        setTimeout(type, 80);
+    }
+})();
+
+// Matrix Effect
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = "01";
+const fontSize = 14;
+const columns = canvas.width/fontSize;
+const drops = [];
+
+for(let x=0; x<columns; x++)
+    drops[x]=1;
+
+function draw(){
+    ctx.fillStyle="rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#0f0";
+    ctx.font=fontSize+"px monospace";
+    for(let i=0;i<drops.length;i++){
+        const text=letters.charAt(Math.floor(Math.random()*letters.length));
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
+            drops[i]=0;
+        drops[i]++;
+    }
+}
+setInterval(draw,33);
+</script>
+
+</body>
+</html>
